@@ -1,0 +1,62 @@
+﻿@model Book.Models.Product
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Product</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" asp-route-id="@Model.ProductID" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="Name" class="control-label">Enter Name</label>
+                <input type="text" for="Name" value="@Model.Name" name="Name" class="form-control" placeholder="Enter Name">
+            </div>
+            <div class="form-group">
+                <label for="Description" class="control-label">Enter Description</label>
+                <input type="text" for="Description" value="@Model.Description" name="Description" class="form-control" placeholder="Enter Description">
+            </div>
+            <div class="form-group">
+                <label for="File" class="control-label">Enter Image </label>
+                <input type="file" for="File" name="File" value="@Model.img" class="form-control-file" id="exampleFormControlFile1">
+            </div>
+            <div class="form-group">
+                <label for="Price" class="control-label">Enter Price </label>
+                <input type="number" for="Price" value="@Model.Price" name="Price" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="Quantity" class="control-label">Enter Quantity </label>
+                <input type="number" for="Quantity" value="@Model.Quantity" name="Quantity" class="form-control">
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryID" class="control-label"></label>
+                <select asp-for="CategoryID" name="CategoryID">
+                    @foreach (var item in ViewBag.CategoryID)
+                    {
+                        if (item.CategoryID == Model.CategoryID)
+                        {
+                            <option selected value="@item.CategoryID">@item.CategoryName</option>
+                        }
+                        else
+                        {
+                            <option value="@item.CategoryID">@item.CategoryName</option>
+
+
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

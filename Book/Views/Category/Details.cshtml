@@ -1,0 +1,37 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<h1>Detail</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => Model.CategoryID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.CategoryName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@Model.CategoryID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@Model.CategoryID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@Model.CategoryID">Delete</a>|
+                <a asp-action="Index">Back To Home</a>
+            </td>
+        </tr>
+
+    </tbody>
+</table>

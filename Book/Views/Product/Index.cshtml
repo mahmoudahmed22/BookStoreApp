@@ -1,0 +1,99 @@
+﻿@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc;
+@using X.PagedList.Web.Common;
+@model X.PagedList.IPagedList<Book.Models.Product>
+
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+<p>
+    @if (User.Identity.IsAuthenticated) { 
+    <a style="color:black" class="btn btn-info" asp-action="Create">Create New</a>
+    }
+</p>
+
+
+<table class="table ">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Products.Name)*@
+                Name
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Products.Description)*@
+                Description
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Products.img)*@
+                img
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Products.Price)*@
+                Price
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Products.Quantity)*@
+                Quantity
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Products.Category)*@
+                Category
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <img src="~/uploads/@item.img" width="150" height="150" />
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryID)
+                </td>
+                <td>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.ProductID">Edit</a> 
+                <a asp-action="Detail" asp-route-id="@item.ProductID">Details</a> 
+                <a asp-action="Delete" asp-route-id="@item.ProductID">Delete</a> 
+                                                                                 }
+                <form id="@item.ProductID" asp-action="AddToCart"
+                      asp-controller="Cart" asp-route-productId="@item.ProductID" method="post">
+                    <input type="hidden" asp-for="@item.ProductID" />
+                    <input type="hidden" name="returnUrl"
+                           value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                    <span class="card-text p-1">
+                        @item.Description
+                        <button type="submit"
+                                class="btn btn-success btn-sm pull-right" style="float:right">
+                            Add To Cart
+                        </button>
+                    </span>
+                </form>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div style="margin:auto;position:absolute;left:36%">
+    @Html.PagedListPager((X.PagedList.IPagedList)ViewBag.Products, page => Url.Action("Index", "Product", new { page = page }))
+</div>

@@ -1,0 +1,20 @@
+﻿@model Cart
+<a style="position:absolute;top:8px;"
+   asp-controller="Cart" asp-action="Index"
+   asp-route-returnurl="@ViewContext.HttpContext.Request.PathAndQuery()">
+    <i class="glyphicon glyphicon-shopping-cart" style="color:azure"></i>
+</a>
+@if (Model.Lines.Count() > 0)
+{
+    <span style="border-radius:50%;font-size:17px; color:white;line-height:8px;margin-left:7px;width:60px;height:60px;">
+        @Model.Lines.Sum(x => x.Quantity) @*item(s)*@
+        @*@Model.ComputeTotalValue().ToString("c")*@
+    </span>
+}
+else
+{
+    <span style="border-radius:50%;font-size:17px; color:white;line-height:8px;margin-left:7px;width:60px;height:60px;">
+        0
+    </span>
+}
+

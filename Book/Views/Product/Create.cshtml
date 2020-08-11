@@ -1,0 +1,44 @@
+﻿@model ProductViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Enter New Book</h1>
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label for="Name" class="control-label">Enter Name</label>
+        <input type="text" for="Name" name="Name" class="form-control" placeholder="Enter Name">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="Description" class="control-label">Enter Description</label>
+        <input type="text" for="Description" name="Description" class="form-control" placeholder="Enter Description">
+    </div>
+    <div class="form-group">
+        <label for="File" class="control-label">Enter Image </label>
+        <input type="file" for="File" name="File" class="form-control-file" id="exampleFormControlFile1">
+    </div>
+    <div class="form-group">
+        <label for="Price" class="control-label">Enter Price </label>
+        <input type="number" for="Price" name="Price" class="form-control">
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="Quantity" class="control-label">Enter Quantity </label>
+        <input type="number" for="Quantity" name="Quantity" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="CategoryID">Example select</label>
+        <select class="form-control" for="CategoryID" name="CategoryID" id="exampleFormControlSelect1">
+
+
+            @foreach (var item in ViewBag.cat)
+            {
+                <option value="@item.CategoryID">@item.CategoryName</option>
+            }
+
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

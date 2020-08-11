@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Book</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="~/fontawesome-iconpicker/css/fontawesome-iconpicker.css" rel="stylesheet" />
+    <script src="~/fontawesome-iconpicker/js/fontawesome-iconpicker.js"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+       
+       .navbar {
+  padding:0rem;
+  margin-bottom:2rem;
+}
+
+.dropdown .dropdown-menu {
+  border-radius:0;
+ }
+
+
+
+@@media(min-width: 768px) {
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+  border-radius:0;
+ }
+}
+        .navbar-dark .navbar-nav .nav-link {
+            color: white;
+        }
+    </style>
+    
+</head>
+<body style="background-color:lightgray">
+    <header style="height:15%">
+
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top" style="color:azure">
+            <!-- One of the primary actions on mobile is to call a business - This displays a phone button on mobile only -->
+            <div class="navbar-toggler-right">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+
+
+
+
+            <div class="collapse navbar-collapse flex-column " id="navbar">
+
+                <ul class="navbar-nav  w-100  px-3 mr-auto" style="color:azure">
+                    <li class="nav-item active">
+                        <img src="~/bb2.gif" width="50px" height="50px" />
+                    </li>
+                    <li class="nav-item" style="color:aqua">
+                        <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link " asp-area="" asp-controller="Product" asp-action="Index">Product</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " asp-area="" asp-controller="Category" asp-action="Index">Category</a>
+                    </li>
+
+
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>
+                            <a class="nav-link" asp-controller="Account" asp-action="Logout">Logout</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" asp-controller="Administration" asp-action="ListRoles"> List Roles</a>
+                        </li>
+
+                    }
+                    else
+                    {
+                        <li>
+                            <a class="nav-link" asp-controller="Account" asp-action="Register">Register</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" asp-controller="Account" asp-action="Login">Login</a>
+                        </li>
+                    }
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Filter By Category
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @await Component.InvokeAsync("NavigationMenu")
+                        </div>
+                    </li>
+                    <li class="nav-item">
+
+                    </li>
+                    <li class="nav-item" style="margin-left:46%">
+                        @await Component.InvokeAsync("CartSummary")
+                    </li>
+
+                </ul>
+                
+
+
+
+                <ul class="navbar-nav justify-content-end w-100 px-5">
+                    <li class="nav-item" >
+                        <form asp-action="ListSearch" asp-controller="Product" method="post" class="form-inline my-2 my-lg-0">
+                            <input  class="form-control mr-sm-2 input-lg input-group-lg" type="search" name="search" placeholder="Product" aria-label="Username" aria-describedby="basic-addon1">
+                            <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Search</button>
+
+                        </form>
+                    </li>
+                  
+                </ul>
+            </div>
+
+        </nav>
+        @*<nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <img src="~/1DDFE633-2B85-468D-B28D05ADAE7D1AD8_source.jpg" width="50px" height="50px" />
+                    </li>
+
+                    <li class="nav-item" style="color:aqua">
+                        <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link " asp-area="" asp-controller="Product" asp-action="Index">Product</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " asp-area="" asp-controller="Category" asp-action="Index">Category</a>
+                    </li>
+
+
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>
+                            <a class="nav-link" asp-controller="Account" asp-action="Logout">Logout</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" asp-controller="Administration" asp-action="ListRoles"> List Roles</a>
+                        </li>
+
+                    }
+                    else
+                    {
+                        <li>
+                            <a class="nav-link" asp-controller="Account" asp-action="Register">Register</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" asp-controller="Account" asp-action="Login">Login</a>
+                        </li>
+                    }
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Filter By Category
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @await Component.InvokeAsync("NavigationMenu")
+                        </div>
+                    </li>
+                    <li class="nav-item">
+
+                    </li>
+                    <li class="nav-item">
+                        @await Component.InvokeAsync("CartSummary")
+                    </li>
+                    <li class="nav-item">
+
+                    </li>
+
+                </ul>
+
+
+                <form asp-action="ListSearch" asp-controller="Product" method="post">
+                    <div class="input-group" style="width:300px">
+                        <input class="form-control mr-sm-2" type="search" name="search" placeholder="Product" aria-label="Username" aria-describedby="basic-addon1">
+                        <button type="submit" class="btn btn-outline-success my-2 my-sm-0" id="basic-addon1">Search</button>
+
+                    </div>
+
+                </form>
+
+            </div>
+        </nav>*@
+
+    </header>
+
+   
+    <div class="container" style="height:70%;position:relative;top:0px;">
+
+        <main role="main" style="padding:0px;margin:0px">
+            
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class=" footer text-center" style="height:4%">
+        <div class="container">
+            &copy; 2020 - Book - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

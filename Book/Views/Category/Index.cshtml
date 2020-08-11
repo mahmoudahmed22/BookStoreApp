@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Book.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<p>
+    <a class="btn btn-info" asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+
+            <td>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a asp-action="Edit" asp-route-id="@item.CategoryID">Edit</a>
+                }
+                <a asp-action="Details" asp-route-id="@item.CategoryID">Details</a> 
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a asp-action="Delete" asp-route-id="@item.CategoryID">Delete</a>
+                }
+                </td>
+        </tr>
+}
+    </tbody>
+</table>

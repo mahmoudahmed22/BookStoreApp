@@ -1,0 +1,59 @@
+﻿@model Book.Models.Product
+
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<h1>Detail</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.img)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Description)
+            </td>
+            <td>
+                <img src="~/uploads/@Model.img" width="150" height="150" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => @Model.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => @Model.Category)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@Model.ProductID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@Model.ProductID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@Model.ProductID">Delete</a>|
+                <a asp-action="Index">Back To Home</a> 
+            </td>
+        </tr>
+
+    </tbody>
+</table>
